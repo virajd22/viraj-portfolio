@@ -111,7 +111,7 @@ export default function App() {
           className="text-xl font-bold text-purple-500 cursor-pointer"
           onClick={() => handleNavClick("home")}
         >
-          Viraj Dhiagude
+          Viraj Dhiagude..
         </h1>
 
         <div className="hidden md:flex gap-6 font-semibold">
@@ -142,42 +142,30 @@ export default function App() {
         </button>
       </nav>
 
-      {/* HERO */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center pt-24 px-6">
-        <motion.img
-          src="/profile.png"
-          className="w-60 rounded-full border-4 border-purple-500 shadow-xl mb-6"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        />
-
-        <motion.h1
-          className="text-5xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          Hi, I'm Viraj Dhaigude
-        </motion.h1>
-
-        <p className={`mt-4 text-xl ${textSub}`}>
-          S.E Student | Python & DSA | Future Software Engineer 🚀
-        </p>
-
-        <a
-          href="/resume.pdf"
-          download
-          className="mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold"
-        >
-          Download Resume
-        </a>
-
-        <div className="flex gap-6 mt-6 text-2xl text-purple-400">
-          <a href="https://www.linkedin.com/in/viraj-dhaigude-7a0089333/" target="_blank"><FaLinkedin/></a>
-          <a href="https://www.instagram.com/theviraj.dhaigude/" target="_blank"><FaInstagram/></a>
-          <a href="https://github.com/" target="_blank"><FaGithub/></a>
-          <a href="mailto:vdhaigude507@gmail.com"><FaEnvelope/></a>
-        </div>
+       {/* HERO */}
+      <section id="home" className="relative flex items-center justify-center min-h-[110vh] pt-28 px-6 z-10">
+        <div className="absolute inset-0 flex"><div className="w-1/2 bg-purple-900"></div><div className="w-1/2 bg-gray-900"></div></div>
+        <motion.img src="/profile.png" alt="Viraj" className="w-80 md:w-96 object-contain z-10 border-8 border-purple-500 rounded-full shadow-2xl"
+          initial={{opacity:0, y:-20}} animate={{opacity:1,y:0}} transition={{type:"spring",stiffness:120,duration:1.5}} whileHover={{scale:1.05,rotate:2}}/>
+        <motion.div className="absolute left-0 md:left-16 w-1/2 text-center md:text-left px-4 space-y-4"
+          initial={{x:-60,opacity:0}} animate={{x:0,opacity:1}} transition={{duration:1.2}}>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Viraj</h1>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Dhaigude</h1>
+        </motion.div>
+        <motion.div className="absolute right-0 md:right-16 w-1/2 text-center md:text-right px-4 space-y-2"
+          initial={{x:60,opacity:0}} animate={{x:0,opacity:1}} transition={{duration:1.2}}>
+          <p className="text-gray-300 text-2xl md:text-3xl font-semibold">S.E Student</p>
+          <p className="text-gray-300 text-2xl md:text-3xl font-semibold">Python & DSA Learner</p>
+          <p className="text-gray-300 text-2xl md:text-3xl font-semibold">Future Software Engineer 🚀</p>
+          <motion.button className="mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold shadow-lg"
+            whileHover={{scale:1.1,rotate:2}} transition={{type:"spring",stiffness:200}}>Download Resume</motion.button>
+          <div className="mt-6 flex justify-center md:justify-end gap-6">
+            {[FaLinkedin,FaInstagram,FaGithub,FaEnvelope].map((Icon,i)=>(
+              <motion.a key={i} href="#" target="_blank" className="text-purple-400 hover:text-pink-500 text-2xl"
+                whileHover={{scale:1.3,rotate:10}} transition={{type:"spring",stiffness:200}}><Icon/></motion.a>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* ABOUT */}
