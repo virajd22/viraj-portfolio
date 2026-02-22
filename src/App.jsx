@@ -371,9 +371,13 @@ export default function App() {
   </div>
 </section>
 
-      <p className="text-sm text-gray-400">
-  © 2026 Viraj Dhaigude. Built with React & Tailwind CSS.
-</p>
+      <div className="border-t border-gray-700 mt-8 pt-6 text-center">
+  <p className="text-sm text-gray-400 tracking-wide">
+    © 2026 <span className="text-white font-medium">Viraj Dhaigude</span>.  
+    Built with <span className="text-blue-400">React</span> &{" "}
+    <span className="text-cyan-400">Tailwind CSS</span>.
+  </p>
+</div>
     </div>
   );
 }
