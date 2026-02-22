@@ -157,13 +157,59 @@ export default function App() {
           <p className="text-gray-300 text-2xl md:text-3xl font-semibold">S.E Student</p>
           <p className="text-gray-300 text-2xl md:text-3xl font-semibold">Python & DSA Learner</p>
           <p className="text-gray-300 text-2xl md:text-3xl font-semibold">Future Software Engineer 🚀</p>
-          <motion.button className="mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold shadow-lg"
-            whileHover={{scale:1.1,rotate:2}} transition={{type:"spring",stiffness:200}}>Download Resume</motion.button>
+          <motion.a
+  href="/resume.pdf"
+  download
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-6 inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold shadow-lg"
+  whileHover={{ scale: 1.1 }}
+  transition={{ type: "spring", stiffness: 200 }}
+>
+  Download Resume
+</motion.a>
           <div className="mt-6 flex justify-center md:justify-end gap-6">
-            {[FaLinkedin,FaInstagram,FaGithub,FaEnvelope].map((Icon,i)=>(
-              <motion.a key={i} href="#" target="_blank" className="text-purple-400 hover:text-pink-500 text-2xl"
-                whileHover={{scale:1.3,rotate:10}} transition={{type:"spring",stiffness:200}}><Icon/></motion.a>
-            ))}
+           <div className="mt-6 flex justify-center md:justify-end gap-6">
+  
+  <motion.a
+    href="https://www.linkedin.com/in/viraj-dhaigude-7a0089333/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-purple-400 hover:text-pink-500 text-2xl"
+    whileHover={{ scale: 1.3 }}
+  >
+    <FaLinkedin />
+  </motion.a>
+
+  <motion.a
+    href="https://www.instagram.com/theviraj.dhaigude/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-purple-400 hover:text-pink-500 text-2xl"
+    whileHover={{ scale: 1.3 }}
+  >
+    <FaInstagram />
+  </motion.a>
+
+  <motion.a
+    href="https://github.com/virajd22"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-purple-400 hover:text-pink-500 text-2xl"
+    whileHover={{ scale: 1.3 }}
+  >
+    <FaGithub />
+  </motion.a>
+
+  <motion.a
+    href="mailto:virajbd111@gmail.com"
+    className="text-purple-400 hover:text-pink-500 text-2xl"
+    whileHover={{ scale: 1.3 }}
+  >
+    <FaEnvelope />
+  </motion.a>
+
+</div>
           </div>
         </motion.div>
       </section>
