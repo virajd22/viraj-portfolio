@@ -9,6 +9,8 @@ import {
   FaEnvelope,
   FaMoon,
   FaSun,
+  FaBars,
+  FaTimes
 } from "react-icons/fa";
 
 export default function App() {
@@ -16,7 +18,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("skills");
   const [activeSection, setActiveSection] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  
   const skills = [
     { name: "Python", percent: 90 },
     { name: "DSA", percent: 80 },
@@ -107,40 +110,77 @@ export default function App() {
 
       {/* Navbar */}
       <nav className="fixed top-0 w-full backdrop-blur-md z-50 px-6 py-4 flex justify-between items-center">
-        <h1
-          className="text-xl font-bold text-purple-500 cursor-pointer"
-          onClick={() => handleNavClick("home")}
-        >
-          Viraj Dhiagude..
-        </h1>
 
-        <div className="hidden md:flex gap-6 font-semibold">
-          {["Home","About","Skills","Projects","Certifications","Contact"].map(
-            (label, i) => {
-              const ids = ["home","about","skills","projects","certs","contact"];
-              return (
-                <button
-                  key={i}
-                  onClick={() => handleNavClick(ids[i])}
-                  className={`hover:text-purple-500 ${
-                    activeSection === ids[i] ? "text-purple-400 underline" : ""
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            }
-          )}
-        </div>
+  <h1
+    className="text-xl font-bold text-purple-500 cursor-pointer"
+    onClick={() => handleNavClick("home")}
+  >
+    Viraj Dhaigude
+  </h1>
 
-        {/* Dark Toggle */}
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="text-xl text-purple-400"
-        >
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
-      </nav>
+  {/* Desktop Menu */}
+  <div className="hidden md:flex gap-6 font-semibold">
+    {["Home","About","Skills","Projects","Certifications","Contact"].map(
+      (label, i) => {
+        const ids = ["home","about","skills","projects","certs","contact"];
+        return (
+          <button
+            key={i}
+            onClick={() => handleNavClick(ids[i])}
+            className="hover:text-purple-500"
+          >
+            {label}
+          </button>
+        );
+      }
+    )}
+  </div>
+
+  {/* Right Side */}
+  <div className="flex items-center gap-4">
+
+    {/* Dark Mode Toggle */}
+    <button
+      onClick={() => setDarkMode(!darkMode)}
+      className="text-xl text-purple-400"
+    >
+      {darkMode ? <FaSun /> : <FaMoon />}
+    </button>
+
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden text-2xl text-purple-400"
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      {menuOpen ? <FaTimes /> : <FaBars />}
+    </button>
+  </div>
+</nav>
+<AnimatePresence>
+  {menuOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="fixed top-16 left-0 w-full bg-black/90 backdrop-blur-md flex flex-col items-center gap-6 py-6 md:hidden z-40"
+    >
+      {["Home","About","Skills","Projects","Certifications","Contact"].map(
+        (label, i) => {
+          const ids = ["home","about","skills","projects","certs","contact"];
+          return (
+            <button
+              key={i}
+              onClick={() => handleNavClick(ids[i])}
+              className="text-white text-lg hover:text-purple-400"
+            >
+              {label}
+            </button>
+          );
+        }
+      )}
+    </motion.div>
+  )}
+</AnimatePresence>
 
        {/* HERO */}
       <section id="home" className="relative flex items-center justify-center min-h-[110vh] pt-28 px-6 z-10">
@@ -202,7 +242,7 @@ export default function App() {
   </motion.a>
 
   <motion.a
-    href="mailto:virajbd111@gmail.com"
+    href="mailto:vdhaigude507@gmail.com"
     className="text-purple-400 hover:text-pink-500 text-2xl"
     whileHover={{ scale: 1.3 }}
   >
