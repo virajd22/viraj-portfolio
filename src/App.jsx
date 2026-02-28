@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 import { useState, useEffect } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import {
   FaLinkedin,
   FaInstagram,
@@ -19,13 +21,42 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  
+  const form = useRef();
+  const [sending, setSending] = useState(false);
+  const [success, setSuccess] = useState(false);
   const skills = [
     { name: "Python", percent: 90 },
     { name: "DSA", percent: 80 },
     { name: "React", percent: 85 },
     { name: "Tailwind", percent: 80 },
   ];
+
+  const sendEmail = (e) => {
+  e.preventDefault();
+  setSending(true);
+
+  emailjs
+    .sendForm(
+      "service_aucua6s",
+      "template_3qvx9rn",
+      form.current,
+      "qmGQklLooA2ygRrid"
+    )
+    .then(() => {
+      setSending(false);
+      setSuccess(true);
+      form.current.reset();
+
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    })
+    .catch((error) => {
+      setSending(false);
+      alert("Failed to send message ❌");
+      console.error(error);
+    });
+};
 
   const projects = [
     { title: "Portfolio Website", image: "/p1.png", link: "#" },
@@ -71,7 +102,7 @@ export default function App() {
   }, []);
 
   const particlesInit = async (main) => {
-    await loadFull(main);
+    await loadSlim(main);
   };
 
   const handleNavClick = (id) => {
@@ -359,14 +390,48 @@ export default function App() {
     </div>
 
     <div className={`${cardBg} p-6 rounded-xl`}>
-      <h3 className="text-xl font-semibold mb-4">Send Message</h3>
-      <input className="w-full p-2 mb-3 rounded bg-gray-800" placeholder="Your Name" />
-      <input className="w-full p-2 mb-3 rounded bg-gray-800" placeholder="Your Email" />
-      <textarea className="w-full p-2 mb-3 rounded bg-gray-800" placeholder="Your Message" />
-      <button className="w-full bg-purple-600 py-2 rounded hover:bg-purple-700">
-        Send Message
-      </button>
-    </div>
+  <h3 className="text-xl font-semibold mb-4">Send Message</h3>
+
+  <form ref={form} onSubmit={sendEmail}>
+    <input
+      type="text"
+      name="user_name"
+      required
+      className="w-full p-2 mb-3 rounded bg-gray-800"
+      placeholder="Your Name"
+    />
+
+    <input
+      type="email"
+      name="user_email"
+      required
+      className="w-full p-2 mb-3 rounded bg-gray-800"
+      placeholder="Your Email"
+    />
+
+    <textarea
+      name="message"
+      required
+      className="w-full p-2 mb-3 rounded bg-gray-800"
+      placeholder="Your Message"
+      rows="4"
+    />
+
+    <button
+      type="submit"
+      disabled={sending}
+      className="w-full bg-purple-600 py-2 rounded hover:bg-purple-700 transition"
+    >
+      {sending ? "Sending..." : "Send Message"}
+    </button>
+
+    {success && (
+      <p className="text-green-400 mt-3">
+        Message sent successfully 🚀
+      </p>
+    )}
+  </form>
+</div>
 
   </div>
 </section>
