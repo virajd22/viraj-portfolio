@@ -395,7 +395,7 @@ export default function App() {
   <form ref={form} onSubmit={sendEmail}>
     <input
       type="text"
-      name="user_name"
+      name="name"
       required
       className="w-full p-2 mb-3 rounded bg-gray-800"
       placeholder="Your Name"
@@ -403,7 +403,7 @@ export default function App() {
 
     <input
       type="email"
-      name="user_email"
+      name="email"
       required
       className="w-full p-2 mb-3 rounded bg-gray-800"
       placeholder="Your Email"
